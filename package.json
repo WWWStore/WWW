@@ -5,12 +5,32 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --verbose --coverage",
-    "lint": "eslint '**/*.js'"
+    "lint": "eslint '**/*.js'",
+    "start": "node index.js",
+    "watch": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eslint": "^6.1.0",
-    "jest": "^24.8.0"
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb-memory-server": "^5.2.8",
+    "mongoose": "^5.7.5",
+    "mongoose-schema-jsonschema": "^1.2.1",
+    "morgan": "^1.9.1",
+    "require-directory": "^2.1.1",
+    "superagent": "^5.1.0",
+    "swagger-ui-express": "^4.1.2"
+  },
+  "devDependencies": {
+    "debug": "^4.1.1",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
+    "supergoose": "^0.2.6",
+    "supertest": "^4.0.2"
   }
 }
