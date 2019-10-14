@@ -6,7 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 // Required Folders
-const router = require('./routers/router');
+const router = require('./auth/router');
 
 // Prepare express app
 const app = express();
