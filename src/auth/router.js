@@ -5,14 +5,14 @@ const router = express.Router();
 
 const auth = require('./middleware');
 
+const User = require('./users-model');
+
 router.post('/signup', (req, res, next) => {
-  let user = {_id: 1,name: 'Andy',wagon: [],role: 'Marshal',password: 'password'};
+  let user = new User(req.body);
   user.save()
-    .then((user) => {
-      req.token = user.generateToken();
+    .then(user => {
       req.user = user;
-      res.set('token', req.token);
-      res.cookie('auth', req.token);
+      req.token = user.generateToken();
       res.send(req.token);
     })
     .catch(next);
@@ -21,3 +21,5 @@ router.post('/signup', (req, res, next) => {
 router.get('/signin', auth(), (req,res,next) => {
   res.send(req.token);
 });
+
+module.exports = router;

@@ -30,7 +30,8 @@ describe('main router tests', () => {
 describe('User functionality tests', () => {
   it('can create a new user', () => {
     let user = {_id: 1,name: 'Andy',wagon: [],role: 'Marshal',password: 'password'};
-    return router.post('/signup')
+    return router
+      .post('/signup', user)
       .send(user)
       .expect(201)
       .then(result => {

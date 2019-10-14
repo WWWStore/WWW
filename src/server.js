@@ -26,6 +26,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 // Use routes
+app.use(router);
+
 // app.use(router);
 
 module.exports = {

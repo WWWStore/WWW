@@ -1,6 +1,6 @@
 const User = require('./users-model');
 
-module.exports = () => {
+module.exports = () =>
   async (req,res,next) => {
     try {
       let [authType, authString] = (req.headers.authorization || '').split(/\s+/);
@@ -44,4 +44,3 @@ module.exports = () => {
       next({status: 401, message: 'unauthorized'});
     }
   };
-};
