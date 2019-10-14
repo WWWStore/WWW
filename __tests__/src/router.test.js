@@ -25,3 +25,18 @@ describe('main router tests', () => {
       });
   });
 });
+
+describe('User functionality tests', () => {
+  it('can create a new user', () => {
+    let user = new User({name: 'admin', role: 'admin', capabilities: ['create', 'read', 'update']});
+    return mockRequest.post('/signup')
+      .send(user)
+      .expect(201)
+      .then(result => {
+        var token = jwt.decode(result.text);
+        id = token.id;
+        expect(token.id).toBeDefined();
+        expect(token.capabilities).toEqual(['create','read','update']);
+      })
+  })
+})
