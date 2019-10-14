@@ -1,9 +1,0 @@
-{
-  "_id": 1,
-  "name": "Tan Cowboy Boots",
-  "description": "For wearin' on yer feet",
-  "image_url": "google.com",
-  "category_id": 1,
-  "price": 20,
-  "keywords": ["footwear", "boots", "leather"]
-}
