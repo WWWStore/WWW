@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 router.post('/signup', (req, res, next) => {
-  let user = new User(req.body);
+  let user = {_id: 1,name: 'Andy',wagon: [],role: 'Marshal',password: 'password'};
   user.save()
     .then((user) => {
       req.token = user.generateToken();

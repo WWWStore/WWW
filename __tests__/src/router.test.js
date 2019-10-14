@@ -2,6 +2,7 @@
 
 const router = require('../../src/routers/router');
 
+const jwt = require('jsonwebtoken');
 const server = require('../../src/server').server;
 const supergoose = require('../supergoose');
 const mockRequest = supergoose(server);
@@ -16,7 +17,7 @@ describe('main router tests', () => {
       });
   });
 
-  it('should return 500 for a faulty serverside issue', () => {
+  it('should return 500 for a faulty server-side issue', () => {
     return mockRequest
       .get('/500')
       .expect(500)
@@ -28,15 +29,15 @@ describe('main router tests', () => {
 
 describe('User functionality tests', () => {
   it('can create a new user', () => {
-    let user = new User({name: 'admin', role: 'admin', capabilities: ['create', 'read', 'update']});
+    let user = {_id: 1,name: 'Andy',wagon: [],role: 'Marshal',password: 'password'};
     return mockRequest.post('/signup')
       .send(user)
       .expect(201)
       .then(result => {
         var token = jwt.decode(result.text);
-        id = token.id;
+        let id = token.id;
         expect(token.id).toBeDefined();
         expect(token.capabilities).toEqual(['create','read','update']);
-      })
-  })
-})
+      });
+  });
+});
