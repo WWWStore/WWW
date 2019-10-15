@@ -12,6 +12,7 @@ const userAuth = new mongoose.Schema({
     default: 'ranger',
     enum: ['marshal', 'sheriff', 'deputy', 'ranger'],
   },
+  wagon: { type: Array, required: true, default: [] },
 });
 
 userAuth.pre('save', async function() {
@@ -54,4 +55,4 @@ userAuth.methods.generateSecret = function() {
   return process.env.SECRET || 'testingSecret';
 };
 
-module.exports = mongoose.model('userAuth', userAuth);
+module.exports = mongoose.model('users', userAuth);
