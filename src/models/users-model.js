@@ -17,13 +17,14 @@ class Users {
   }
 
   update(id, obj) {
-    return User.findOneAndUpdate({_id: id}, obj, {new: true});
+    return User.findByIdAndUpdate(id, obj, {new: true});
   }
 
   delete(id) {
-    return User.deleteOne({_id: id}), function (err) {
-      if(err) return err;
-    };
+    return User.deleteOne({_id: id})
+      .then(result => {
+        return result.deletedCount === 1;
+      });
   }
 }
 
