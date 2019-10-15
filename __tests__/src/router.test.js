@@ -132,6 +132,23 @@ describe('products router tests', () => {
       });
   });
 
+  it('can update one product by id', () => {
+    expect(id).toBeDefined();
+    return mockRequest.get(`/products/${id}`)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toHaveProperty('name', 'Western Style Cowboy Boots');
+      })
+      .then(() => {
+        return mockRequest.put(`/products/${id}`)
+          .send({name: 'Tan Cowboy Boots'})
+          .expect(200)
+          .then(res => {
+            expect(res.body).toHaveProperty('name', 'Tan Cowboy Boots');
+          });
+      });
+  });
+
   it('can delete one product by id', () => {
     expect(id).toBeDefined();
     return mockRequest.delete(`/products/${id}`)
