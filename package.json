@@ -32,5 +32,8 @@
     "nodemon": "^1.19.3",
     "supergoose": "^0.2.6",
     "supertest": "^4.0.2"
+  },
+  "jest":  {
+    "testEnvironment": "node"
   }
 }
