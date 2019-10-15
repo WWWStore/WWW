@@ -17,7 +17,7 @@ class Users {
   }
 
   update(id, obj) {
-    return User.findOneAndUpdate({_id: id}, obj, {new: true});
+    return User.findByIdAndUpdate(id, obj, {new: true});
   }
 
   delete(id) {
