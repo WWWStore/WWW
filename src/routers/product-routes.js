@@ -29,13 +29,13 @@ function getProduct(req,res,next) {
 }
 
 function postProduct(req,res,next) {
-  products.post(req.body)
+  products.create(req.body)
     .then( result => res.status(200).json(result) )
     .catch( next );
 }
 
 function putProduct(req,res,next) {
-  products.put(req.params.id, req.body)
+  products.update(req.params.id, req.body)
     .then( result => res.status(200).json(result) )
     .catch( next );
 }

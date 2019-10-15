@@ -9,7 +9,7 @@ let product = {
   name: 'Colt Model 1851 Revolver',
   description: '6-shot percussion revolver',
   image_url: 'image_url',
-  category: 'revolvers',
+  categories: ['guns'],
   price: 50.00,
   keywords: ['colt', 'revolver', 'gun'],
 };
@@ -23,7 +23,7 @@ describe('Testing products model', () => {
 
     let saved = await products.get(record._id);
     expect(saved).toHaveProperty('price', 50.00);
-    expect(saved).toHaveProperty('category', 'revolvers');
+    expect(saved.categories.toObject()).toEqual(['guns']);
   });
   it('Can get a single product by id', async () => {
     let record = await products.create(product);
@@ -34,7 +34,6 @@ describe('Testing products model', () => {
   it('Can get all products', async () => {
     let record = await products.create(product);
 
-    let result = await products.delete(record._id);
-    console.log(result, await products.get());
+    await products.delete(record._id);
   });
 });
