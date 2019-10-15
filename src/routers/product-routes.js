@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Products = require('../models/products/products');
+const Products = require('../models/products-model');
 const products = new Products();
 
 router.get('/products', getAllProducts);
@@ -29,13 +29,13 @@ function getProduct(request,response,next) {
 }
 
 function postProduct(request,response,next) {
-  products.create(request.body)
+  products.post(request.body)
     .then( result => response.status(200).json(result) )
     .catch( next );
 }
 
 function putProduct(request,response,next) {
-  products.update(request.params.id, request.body)
+  products.put(request.params.id, request.body)
     .then( result => response.status(200).json(result) )
     .catch( next );
 }

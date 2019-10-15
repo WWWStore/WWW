@@ -1,7 +1,5 @@
 'use strict';
 
-const router = require('../../src/auth/router');
-
 const jwt = require('jsonwebtoken');
 const server = require('../../src/server').server;
 const supergoose = require('../supergoose');
@@ -9,7 +7,7 @@ const mockRequest = supergoose(server);
 
 let user = {username: 'Andy', wagon: [], role: 'marshal', password: 'password'};
 
-describe('main router tests', () => {
+describe('error handling tests', () => {
   it('should return 404 for a nonexisting page', () => {
     return mockRequest
       .get('/404')
@@ -66,6 +64,16 @@ describe('Auth Router', () => {
       .then(results => {
         let token = jwt.decode(results.text);
         expect(token.id).toEqual(id);
+      });
+  });
+});
+
+describe('category router tests', () => {
+  it('can get and display all products on the home page', () => {
+    return mockRequest.get('/products')
+      .expect(200)
+      .then(results => {
+        expect(results).toBeDefined();
       });
   });
 });
