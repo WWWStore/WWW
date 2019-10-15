@@ -11,6 +11,10 @@ class Categories {
     }
   }
 
+  getBySlug(slug) {
+    return Category.findOne({ slug });
+  }
+
   create(obj) {
     let newRecord = new Category(obj);
     return newRecord.save();

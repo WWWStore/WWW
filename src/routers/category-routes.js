@@ -1,52 +1,38 @@
 const express = require('express');
 const router = express.Router();
 
-const Categories = require('../models/categories/categories');
+const Categories = require('../models/categories-model');
 const categories = new Categories();
 
-router.get('/', getCategories);
-router.post('/', postCategories);
-router.get('/:id', getCategory);
-router.put('/:id', putCategories);
-router.delete('/:id', deleteCategories);
+router.get('/', getHome);
+router.get('/categories/:slug', getCategory);
+router.post('/categories/:name', postCategory);
 
 // ROUTE HANDLER FUNCTIONS
 
-function getCategories(request,response,next) {
+function getHome(req,res,next) {
   categories.get()
-    .then( data => {
+    .then(data => {
       const output = {
         count: data.length,
         results: data,
       };
-      response.status(200).json(output);
+      res.status(200).json(output);
     })
-    .catch( next );
+    .catch(next);
 }
 
-function getCategory(request,response,next) {
-  categories.get(request.params.id)
-    .then( result => response.status(200).json(result) )
-    .catch( next );
+function getCategory(req,res,next) {
+  categories.getBySlug(req.params.slug)
+    .then(result => res.status(200).json(result))
+    .catch(next);
 }
 
-function postCategories(request,response,next) {
-  categories.create(request.body)
-    .then( result => {
-      response.status(200).json(result);
+function postCategory(req,res,next) {
+  categories.create(req.body)
+    .then(result => {
+      res.status(200).json(result);
     } )
-    .catch( next );
-}
-
-function putCategories(request,response,next) {
-  categories.update(request.params.id, request.body)
-    .then( result => response.status(200).json(result) )
-    .catch( next );
-}
-
-function deleteCategories(request,response,next) {
-  categories.delete(request.params.id)
-    .then( result => response.status(200).json(result) )
     .catch( next );
 }
 
