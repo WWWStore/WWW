@@ -6,7 +6,7 @@ let products = mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   image_url: { type: String, required: true },
-  category: { type: String, required: true },
+  categories: { type: Array, required: true },
   price: { type: Number, required: true },
   keywords: { type: Array, required: false },
 });

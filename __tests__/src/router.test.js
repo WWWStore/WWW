@@ -7,6 +7,7 @@ const mockRequest = supergoose(server);
 
 let user = {username: 'Andy', wagon: [], role: 'marshal', password: 'password'};
 let category = {name: 'Boots', description: 'Cowboy boots, winter boots, rain boots, fluffy boots, big boots, small boots.', slug: 'boots'};
+let product = {name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', categories: ['boots', 'shoes', 'clothes'], image_url: 'google.com', keywords: ['boots', 'cowboy', 'tan', 'brown']};
 
 describe('error handling tests', () => {
   it('should return 404 for a nonexisting page', () => {
@@ -43,7 +44,6 @@ describe('Auth Router', () => {
         id = token.id;
         encodedToken = results.text;
         expect(token.id).toBeDefined();
-        console.log(token);
         expect(token.role).toBeDefined();
       });
   });
@@ -69,8 +69,8 @@ describe('Auth Router', () => {
   });
 });
 
-describe('category and product router tests', () => {
-  it('can post a category', () => {
+describe('category router tests', () => {
+  it('can create a category', () => {
     return mockRequest.post('/categories/boots')
       .send(category)
       .expect(200)
@@ -85,8 +85,87 @@ describe('category and product router tests', () => {
     return mockRequest.get('/categories/boots')
       .expect(200)
       .then(res => {
-        console.log(res.body);
         expect(res.body).toHaveProperty('slug', 'boots');
+      });
+  });
+});
+
+describe('products router tests', () => {
+  let id = null;
+  it('can create a product', () => {
+    return mockRequest.post('/products')
+      .send(product)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toHaveProperty('name', 'Western Style Cowboy Boots');
+        expect(res.body).toHaveProperty('price', 4);
+        expect(res.body).toHaveProperty('description', 'Your average, every day, normal cowboy needs boots. Available in tan or brown.');
+        expect(res.body.categories).toEqual(['boots', 'shoes', 'clothes']);
+        expect(res.body).toHaveProperty('image_url', 'google.com');
+        expect(res.body.keywords).toEqual(['boots', 'cowboy', 'tan', 'brown']);
+
+        id = res.body._id;
+      });
+  });
+
+  it('can get all products', () => {
+    return mockRequest.post('/products')
+      .send(product)
+      .expect(200)
+      .then(() => {
+        return mockRequest.get('/products')
+          .expect(200)
+          .then(res => {
+            console.log(res.body.results[0]);
+            expect(res.body.results[0]).toHaveProperty('name', 'Western Style Cowboy Boots');
+            expect(res.body.results.length).toBe(2);
+          });
+      });
+  });
+
+  it('can get one product by id', () => {
+    expect(id).toBeDefined();
+    return mockRequest.get(`/products/${id}`)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toHaveProperty('name', 'Western Style Cowboy Boots');
+      });
+  });
+
+  it('can update one product by id', () => {
+    expect(id).toBeDefined();
+    return mockRequest.get(`/products/${id}`)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toHaveProperty('name', 'Western Style Cowboy Boots');
+      })
+      .then(() => {
+        return mockRequest.put(`/products/${id}`)
+          .send({name: 'Tan Cowboy Boots'})
+          .expect(200)
+          .then(res => {
+            expect(res.body).toHaveProperty('name', 'Tan Cowboy Boots');
+          });
+      });
+  });
+
+  it('can delete one product by id', () => {
+    expect(id).toBeDefined();
+    return mockRequest.delete(`/products/${id}`)
+      .expect(200)
+      .then(() => {
+        return mockRequest.get('/products')
+          .expect(200)
+          .then(res => {
+            expect(res.body.results.length).toBe(1);
+          });
+      })
+      .then(() => {
+        return mockRequest.get(`/products/${id}`)
+          .expect(200)
+          .then(res => {
+            expect(res.body).toBe(null);
+          });
       });
   });
 });

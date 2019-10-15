@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
-const users = new mongoose.Schema({
+const userAuth = new mongoose.Schema({
   username: {type: String, required: true, unique: true},
   password: {type: String, required: true},
   email: {type: String},
@@ -14,19 +14,19 @@ const users = new mongoose.Schema({
   },
 });
 
-users.pre('save', async function() {
+userAuth.pre('save', async function() {
   if(this.isModified('password')) {
     this.password = await bcrypt.hash(this.password, 10);
   }
 });
 
-users.statics.authenticateBasic = async function({username, password}) {
+userAuth.statics.authenticateBasic = async function({username, password}) {
   let query = {username};
   let user = await this.findOne(query);
   return user && user.comparePassword(password);
 };
 
-users.statics.authenticateToken = async function(token) {
+userAuth.statics.authenticateToken = async function(token) {
   let tokenData = jwt.decode(token);
   let query = {_id: tokenData.id};
   let user = await this.findOne(query);
@@ -37,12 +37,12 @@ users.statics.authenticateToken = async function(token) {
   }
 };
 
-users.methods.comparePassword = async function(password) {
+userAuth.methods.comparePassword = async function(password) {
   let valid = await bcrypt.compare(password, this.password);
   return valid ? this : null;
 };
 
-users.methods.generateToken = function() {
+userAuth.methods.generateToken = function() {
   let tokenData = {
     id: this._id,
     role: this.role,
@@ -50,8 +50,8 @@ users.methods.generateToken = function() {
   return jwt.sign(tokenData, this.generateSecret());
 };
 
-users.methods.generateSecret = function() {
+userAuth.methods.generateSecret = function() {
   return process.env.SECRET || 'testingSecret';
 };
 
-module.exports = mongoose.model('users', users);
+module.exports = mongoose.model('userAuth', userAuth);

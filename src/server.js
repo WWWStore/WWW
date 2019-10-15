@@ -6,7 +6,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 // Required Folders
-// const productRouter = require('./routers/product-routes');
+const productRouter = require('./routers/product-routes');
 const categoryRouter = require('./routers/category-routes');
 const authRouter = require('./auth/router');
 const serverErr = require('./middleware/500');
@@ -31,7 +31,7 @@ app.use(express.urlencoded({extended: true}));
 // Use routes
 app.use(authRouter);
 app.use(categoryRouter);
-// app.use(productRouter);
+app.use(productRouter);
 app.use(serverErr);
 
 module.exports = {
