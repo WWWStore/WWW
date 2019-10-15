@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require('./schemas/users-schema.js');
+const User = require('../auth/users-model');
 
 class Users {
   get(id) {

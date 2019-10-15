@@ -17,11 +17,12 @@ describe('users model tests', () => {
     expect(record).toHaveProperty('_id');
     expect(record).toHaveProperty('username', 'Andy');
     expect(record).toHaveProperty('role', 'marshal');
-    expect(record).toHaveProperty('password', 'password');
+    expect(record).toHaveProperty('password');
+    expect(record.password).not.toBe(user.password);
   });
   it('can update() an existing user', async () => {
     let user = {
-      username: 'Andy',
+      username: 'Andy2',
       wagon: [],
       role: 'marshal',
       password: 'password',
@@ -35,7 +36,7 @@ describe('users model tests', () => {
   });
   it('can delete() an existing user', async () => {
     let user = {
-      username: 'Andy',
+      username: 'Andy3',
       wagon: [],
       role: 'marshal',
       password: 'password',
