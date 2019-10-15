@@ -7,6 +7,8 @@ const server = require('../../src/server').server;
 const supergoose = require('../supergoose');
 const mockRequest = supergoose(server);
 
+let user = {_id: 1,name: 'Andy',wagon: [],role: 'Marshal',password: 'password'};
+
 describe('main router tests', () => {
   it('should return 404 for a nonexisting page', () => {
     return mockRequest
@@ -27,17 +29,42 @@ describe('main router tests', () => {
   });
 });
 
-describe('User functionality tests', () => {
+describe('Auth Router', () => {
+
+  let id;
+  let encodedToken;
+
   it('can create a new user', () => {
-    let user = {_id: 1,name: 'Andy',wagon: [],role: 'Marshal',password: 'password'};
-    return router
-      .post('/signup', user)
+    return mockRequest
+      .post('/signup')
       .send(user)
-      .expect(201)
-      .then(result => {
-        var token = jwt.decode(result.text);
+      .expect(200)
+      .then(results => {
+        let token = jwt.decode(results.text);
+        id = token.id;
+        encodedToken = results.text;
         expect(token.id).toBeDefined();
-        expect(token.capabilities).toEqual(['create','read','update']);
+        expect(token.capabilities).toBeDefined();
+      });
+  });
+
+  it('can signin with basic', () => {
+    return mockRequest.get('/signin')
+      .auth(user.username, user.password)
+      .then(results => {
+        let token = jwt.decode(results.text);
+        expect(token.id).toEqual(id);
+        expect(token.capabilities).toBeDefined();
+      });
+  });
+
+  it('can signin with bearer', () => {
+    return mockRequest.post('signin')
+      .set('Authorization', `Bearer ${encodedToken}`)
+      .then(results => {
+        let token = jwt.decode(results.text);
+        expect(token.id).toEqual(id);
+        expect(token.capabilities).toBeDefined();
       });
   });
 });
