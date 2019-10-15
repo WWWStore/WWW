@@ -15,7 +15,7 @@ module.exports = () =>
       }
     }
     catch(err) {
-      return await _authError();
+      return await _authError(err);
     }
 
     async function _authBasic(authString) {
@@ -40,7 +40,7 @@ module.exports = () =>
         await _authError();
       }
     }
-    async function _authError() {
+    async function _authError(err) {
       next({status: 401, message: 'unauthorized'});
     }
   };

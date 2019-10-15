@@ -7,6 +7,7 @@ const morgan = require('morgan');
 
 // Required Folders
 const router = require('./auth/router');
+const serverErr = require('./middleware/500');
 
 // Prepare express app
 const app = express();
@@ -27,6 +28,7 @@ app.use(express.urlencoded({extended: true}));
 
 // Use routes
 app.use(router);
+app.use(serverErr);
 
 // app.use(router);
 

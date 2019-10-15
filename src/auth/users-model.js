@@ -22,8 +22,8 @@ users.pre('save', async function() {
 
 users.statics.authenticateBasic = async function({username, password}) {
   let query = {username};
-  let user = this.findOne(query);
-  return user && users.comparePassword(password);
+  let user = await this.findOne(query);
+  return user && user.comparePassword(password);
 };
 
 users.statics.authenticateToken = async function(token) {
@@ -47,7 +47,7 @@ users.methods.generateToken = function() {
     id: this._id,
     role: this.role,
   };
-  return jwt.sign(tokenData, this.generateSecret);
+  return jwt.sign(tokenData, this.generateSecret());
 };
 
 users.methods.generateSecret = function() {
