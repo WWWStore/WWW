@@ -24,6 +24,7 @@
     "morgan": "^1.9.1",
     "require-directory": "^2.1.1",
     "superagent": "^5.1.0",
+    "supergoose": "^0.2.6",
     "swagger-ui-express": "^4.1.2"
   },
   "devDependencies": {
@@ -33,7 +34,7 @@
     "nodemon": "^1.19.3",
     "supertest": "^4.0.2"
   },
-  "jest":  {
+  "jest": {
     "testEnvironment": "node"
   }
 }
