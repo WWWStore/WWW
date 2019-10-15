@@ -5,33 +5,33 @@ const Categories = require('../models/categories-model');
 const categories = new Categories();
 
 router.get('/', getHome);
-router.get('/categories/:name', getCategory);
+router.get('/categories/:slug', getCategory);
 router.post('/categories/:name', postCategory);
 
 // ROUTE HANDLER FUNCTIONS
 
-function getHome(request,response,next) {
+function getHome(req,res,next) {
   categories.get()
     .then(data => {
       const output = {
         count: data.length,
         results: data,
       };
-      response.status(200).json(output);
+      res.status(200).json(output);
     })
     .catch(next);
 }
 
-function getCategory(request,response,next) {
-  categories.get(request.params.id)
-    .then(result => response.status(200).json(result))
+function getCategory(req,res,next) {
+  categories.getBySlug(req.params.slug)
+    .then(result => res.status(200).json(result))
     .catch(next);
 }
 
-function postCategory(request,response,next) {
-  categories.post(request.body)
+function postCategory(req,res,next) {
+  categories.create(req.body)
     .then(result => {
-      response.status(200).json(result);
+      res.status(200).json(result);
     } )
     .catch( next );
 }

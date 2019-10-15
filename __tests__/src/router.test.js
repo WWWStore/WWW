@@ -6,6 +6,7 @@ const supergoose = require('../supergoose');
 const mockRequest = supergoose(server);
 
 let user = {username: 'Andy', wagon: [], role: 'marshal', password: 'password'};
+let category = {name: 'Boots', description: 'Cowboy boots, winter boots, rain boots, fluffy boots, big boots, small boots.', slug: 'boots'};
 
 describe('error handling tests', () => {
   it('should return 404 for a nonexisting page', () => {
@@ -68,12 +69,24 @@ describe('Auth Router', () => {
   });
 });
 
-describe('category router tests', () => {
-  it('can get and display all products on the home page', () => {
-    return mockRequest.get('/products')
+describe('category and product router tests', () => {
+  it('can post a category', () => {
+    return mockRequest.post('/categories/boots')
+      .send(category)
       .expect(200)
-      .then(results => {
-        expect(results).toBeDefined();
+      .then(res => {
+        expect(res.body).toHaveProperty('name', 'Boots');
+        expect(res.body).toHaveProperty('slug', 'boots');
+        expect(res.body).toHaveProperty('description', 'Cowboy boots, winter boots, rain boots, fluffy boots, big boots, small boots.');
+      });
+  });
+
+  it('can get a category based on name', () => {
+    return mockRequest.get('/categories/boots')
+      .expect(200)
+      .then(res => {
+        console.log(res.body);
+        expect(res.body).toHaveProperty('slug', 'boots');
       });
   });
 });
