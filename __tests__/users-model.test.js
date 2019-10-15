@@ -5,7 +5,7 @@ const users = new Users();
 
 require('./supergoose');
 
-describe('users model test', () => {
+describe('users model tests', () => {
   it('can create a user', async () => {
     let user = {
       username: 'Andy',
@@ -27,8 +27,11 @@ describe('users model test', () => {
       password: 'password',
     };
     let record = await users.create(user);
-    let updatedRecord = await users.update( record._id, {wagon: 'cowboy hat'});
-    expect(updatedRecord).toHaveProperty('wagon', ['cowboy hat']);
+    let updatedUser = await users.update( record._id, { wagon: ['cowboy hat'] });
+    let userObject = updatedUser.toObject();
+    //let saved = await users.get(record._id);
+
+    expect(userObject).toHaveProperty('wagon', ['cowboy hat']);
   });
   it('can delete() an existing user', async () => {
     let user = {
@@ -39,6 +42,6 @@ describe('users model test', () => {
     };
     let record = await users.create(user);
     let deletedRecord = await users.delete(record._id);
-    expect(deletedRecord).toBe(null);
+    expect(deletedRecord).toBe(true);
   });
 });

@@ -21,9 +21,10 @@ class Users {
   }
 
   delete(id) {
-    return User.deleteOne({_id: id}), function (err) {
-      if(err) return err;
-    };
+    return User.deleteOne({_id: id})
+      .then(result => {
+        return result.deletedCount === 1;
+      });
   }
 }
 
