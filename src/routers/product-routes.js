@@ -4,11 +4,27 @@ const router = express.Router();
 const Products = require('../models/products-model');
 const products = new Products();
 
+const Users = require('../models/users-model');
+const users = new Users();
+
 router.get('/products', getAllProducts);
 router.get('/products/:id', getProduct);
 router.post('/products', postProduct);
 router.put('/products/:id', putProduct);
 router.delete('/products/:id', deleteProducts);
+router.post('/products/:id/save', addToCart);
+
+function addToCart(req, res, next) {
+  let currentWagon = users.get(req.userId).wagon;
+  console.log(currentWagon);
+  let update = {
+    wagon: currentWagon.push({
+      productId: req.body.productId,
+      quantity: req.body.quantity,
+    }),
+  };
+  res.send(users.update(req.userId, update));
+}
 
 function getAllProducts(req,res,next) {
   products.get()
