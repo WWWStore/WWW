@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const auth = require('../auth/middleware');
+
 const Products = require('../models/products-model');
 const products = new Products();
 
@@ -12,18 +14,23 @@ router.get('/products/:id', getProduct);
 router.post('/products', postProduct);
 router.put('/products/:id', putProduct);
 router.delete('/products/:id', deleteProducts);
-router.post('/products/:id/save', addToCart);
+router.post('/products/:id/save', auth(), addToCart);
 
 function addToCart(req, res, next) {
-  let currentWagon = users.get(req.userId).wagon;
-  console.log(currentWagon);
+  console.log(req.user);
   let update = {
-    wagon: currentWagon.push({
-      productId: req.body.productId,
-      quantity: req.body.quantity,
-    }),
+    $push: {
+      wagon: {
+        productId: req.params.id,
+        quantity: req.body.quantity,
+      },
+    },
   };
-  res.send(users.update(req.userId, update));
+  users.update(req.user._id, update)
+    .then(saved => {
+      res.send(saved.wagon);
+    })
+    .catch(next);
 }
 
 function getAllProducts(req,res,next) {

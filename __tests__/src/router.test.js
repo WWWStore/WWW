@@ -169,3 +169,24 @@ describe('products router tests', () => {
       });
   });
 });
+
+describe('wagon methods test', () => {
+  let id;
+  it('can add an item to wagon', () => {
+    return mockRequest.post('/products')
+      .send(product)
+      .expect(200)
+      .then(res => {
+        id = res.body._id;
+        return mockRequest.post(`/products/${id}/save`)
+          .auth(user.username, user.password)
+          .send({ quantity: 2 })
+          .expect(200)
+          .then(res => {
+            expect(res.body.length).toBe(1);
+            expect(res.body[0]).toHaveProperty('productId', id);
+            expect(res.body[0]).toHaveProperty('quantity', 2);
+          });
+      });
+  });
+});
