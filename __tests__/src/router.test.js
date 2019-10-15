@@ -131,4 +131,24 @@ describe('products router tests', () => {
         expect(res.body).toHaveProperty('name', 'Western Style Cowboy Boots');
       });
   });
+
+  it('can delete one product by id', () => {
+    expect(id).toBeDefined();
+    return mockRequest.delete(`/products/${id}`)
+      .expect(200)
+      .then(() => {
+        return mockRequest.get('/products')
+          .expect(200)
+          .then(res => {
+            expect(res.body.results.length).toBe(1);
+          });
+      })
+      .then(() => {
+        return mockRequest.get(`/products/${id}`)
+          .expect(200)
+          .then(res => {
+            expect(res.body).toBe(null);
+          });
+      });
+  });
 });
