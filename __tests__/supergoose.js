@@ -19,6 +19,8 @@ async function startDB() {
   const mongooseOptions = {
     useNewUrlParser: true,
     useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
   };
 
   await mongoose.connect(mongoUri, mongooseOptions);
