@@ -116,7 +116,6 @@ describe('products router tests', () => {
         return mockRequest.get('/products')
           .expect(200)
           .then(res => {
-            console.log(res.body.results[0]);
             expect(res.body.results[0]).toHaveProperty('name', 'Western Style Cowboy Boots');
             expect(res.body.results.length).toBe(2);
           });
@@ -172,22 +171,33 @@ describe('products router tests', () => {
 });
 
 describe('wagon methods test', () => {
-  let id;
+  let productId;
   it('can add an item to wagon', () => {
     return mockRequest.post('/products')
       .send(product)
       .expect(200)
       .then(res => {
-        id = res.body._id;
-        return mockRequest.post(`/products/${id}/save`)
+        productId = res.body._id;
+        return mockRequest.post(`/products/${productId}/save`)
           .auth(user.username, user.password)
           .send({ quantity: 2 })
           .expect(200)
           .then(res => {
             expect(res.body.length).toBe(1);
-            expect(res.body[0]).toHaveProperty('productId', id);
+            expect(res.body[0]).toHaveProperty('productId', productId);
             expect(res.body[0]).toHaveProperty('quantity', 2);
           });
+      });
+  });
+
+  it('can get all products from the wagon', () => {
+    return mockRequest.get(`/wagon`)
+      .auth(user.username, user.password)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toEqual([
+          { productId, quantity: 2 },
+        ]);
       });
   });
 });

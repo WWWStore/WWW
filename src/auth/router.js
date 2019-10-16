@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('./middleware');
-const User = require('./users-model');
+const User = require('../models/users-model');
 
 /**
  * @typedef User
