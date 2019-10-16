@@ -12,7 +12,7 @@ router.get('/:username/wagon', auth(), getWagon);
 function getWagon(req, res, next) {
   User.getByUsername(req.params.username)
     .then(results => {
-      res.send(results);
+      res.send(results.wagon);
     });
 }
 
