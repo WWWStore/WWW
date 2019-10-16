@@ -1,0 +1,243 @@
+[{
+  "name": "Dark Brown Cowboy Hat",
+  "description": "Classic headwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 5,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "Tan Cowboy Hat",
+  "description": "Classic headwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 5,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "Dark Brown Cowboy Hat",
+  "description": "Classic headwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 5,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "Straw Cowboy Hat",
+  "description": "Classic headwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 3,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "Black Cowboy Hat",
+  "description": "Classic headwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 5,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "White Cowboy Hat",
+  "description": "Classic headwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 5,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "Dark Brown Cowboy Boots",
+  "description": "Classic footwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["boots"],
+  "price": 18,
+  "keywords": ["boots"]
+},
+
+{
+  "name": "Tan Cowboy Boots",
+  "description": "Classic footwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["boots"],
+  "price": 20,
+  "keywords": ["boots"]
+},
+
+{
+  "name": "Black Cowboy Boots",
+  "description": "Classic footwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["boots"],
+  "price": 20,
+  "keywords": ["boots"]
+},
+
+{
+  "name": "White Cowboy Boots",
+  "description": "Classic footwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["boots"],
+  "price": 22,
+  "keywords": ["boots"]
+},
+
+{
+  "name": "Classic Blue Jeans",
+  "description": "Sturdy pants for any tough job",
+  "image_url": "",
+  "categories": ["pants"],
+  "price": 1.25,
+  "keywords": ["pants", "jeans"]
+},
+
+{
+  "name": "Brown Pants",
+  "description": "Sturdy pants for any occasion",
+  "image_url": "",
+  "categories": ["pants"],
+  "price": 1,
+  "keywords": ["pants"]
+},
+
+{
+  "name": "Black Pants",
+  "description": "Sturdy pants for any occasion",
+  "image_url": "",
+  "categories": ["pants"],
+  "price": 2,
+  "keywords": ["pants"]
+},
+
+{
+  "name": "Plaid Flannel Work Shirt",
+  "description": "Rugged flannel shirt.",
+  "image_url": "",
+  "categories": ["shirts"],
+  "price": 1,
+  "keywords": ["shirts"]
+},
+
+{
+  "name": "Leather Vest",
+  "description": "A leather vest to keep warm",
+  "image_url": "",
+  "categories": ["shirts"],
+  "price": 1,
+  "keywords": ["shirts", "leather", "vests"]
+},
+
+{
+  "name": "Hungarian Half-Bred ",
+  "description": "A grey horse with black feet",
+  "image_url": "",
+  "categories": ["horses"],
+  "price": 160,
+  "keywords": ["horses"]
+},
+
+{
+  "name": "American Standard-Bred",
+  "description": "A brown horse of good quality",
+  "image_url": "",
+  "categories": ["horses"],
+  "price": 120,
+  "keywords": ["horses"]
+},
+
+{
+  "name": "Arabian Horse",
+  "description": "A beautiful white horse. Top of the line",
+  "image_url": "",
+  "categories": ["horses"],
+  "price": 1000,
+  "keywords": ["horses"]
+},
+
+{
+  "name": "Colt Model 1851 Revolver",
+  "description": "6-shot percussion revolver",
+  "image_url": "",
+  "categories": ["firearms"],
+  "price": 20,
+  "keywords": ["firearms", "revolvers", "weapons", "guns", "colt"]
+},
+
+{
+  "name": "Remington Model 1858 Revolver",
+  "description": "6-shot percussion revolver with a quick-change cylinder",
+  "image_url": "",
+  "categories": ["firearms"],
+  "price": 20,
+  "keywords": ["firearms", "revolvers", "guns", "remington", "weapons"]
+},
+
+{
+  "name": "Springfield Model 1861 Rifle",
+  "description": "Rifled musket that fires a .58 round ball",
+  "image_url": "",
+  "categories": ["firearms"],
+  "price": 40,
+  "keywords": ["firearms", "rifles", "guns", "springfield", "weapons"]
+},
+
+{
+  "name": "Baked Beans",
+  "description": "A can of baked beans",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 1,
+  "keywords": ["beans", "food"]
+},
+
+{
+  "name": "Black Beans",
+  "description": "Black beans of high quality. Rich in protein",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 1,
+  "keywords": ["beans", "food"]
+},
+
+{
+  "name": "Lima Beans",
+  "description": "A large and controversial bean",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 1,
+  "keywords": ["beans", "food"]
+},
+
+{
+  "name": "Brown Saddle",
+  "description": "A brown saddle of good quality",
+  "image_url": "",
+  "categories": ["saddles"],
+  "price": 25,
+  "keywords": ["saddles", "leather"]
+},
+
+{
+  "name": "Black Saddle",
+  "description": "A black saddle of great quality",
+  "image_url": "",
+  "categories": ["saddles"],
+  "price": 30,
+  "keywords": ["saddles", "leather"]
+},
+
+{
+  "name": "White Saddle",
+  "description": "A white saddle of legendary quality",
+  "image_url": "",
+  "categories": ["saddles"],
+  "price": 32,
+  "keywords": ["saddles", "leather"]
+}
+]
