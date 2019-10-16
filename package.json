@@ -4,6 +4,7 @@
   "description": "this will be sooooo cool",
   "main": "index.js",
   "scripts": {
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json",
     "test": "jest --verbose --coverage",
     "lint": "eslint '**/*.js'",
     "start": "node index.js",

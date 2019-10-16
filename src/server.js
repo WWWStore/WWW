@@ -10,6 +10,7 @@ const productRouter = require('./routers/product-routes');
 const categoryRouter = require('./routers/category-routes');
 const authRouter = require('./auth/router');
 const serverErr = require('./middleware/500');
+const swagger = require('./api/swagger');
 
 // Prepare express app
 const app = express();
@@ -27,6 +28,10 @@ app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+// Static Routes
+app.use('/docs', express.static('docs'));
+swagger(app);
 
 // Use routes
 app.use(authRouter);

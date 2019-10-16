@@ -1,4 +1,5 @@
-const expressSwaggerGenerator = require('express-swagger-generator');
+const express = require('express');
+const generator = require('express-swagger-generator');
 
 let options = {
   swaggerDefinition: {
@@ -20,21 +21,16 @@ let options = {
     },
   },
   basedir: __dirname, //app absolute path
-  files: ['./*.js'], //Path to the API handle folder
+  files: ['../**/*.js'], //Path to the API handle folder
 };
-
-function enableSwagger(app) {
-  const expressSwagger = expressSwaggerGenerator(app);
-  expressSwagger(options);
-}
 
 // start up a specific standalone swagger server on a specific port
 // http://[domain]/api-docs
-if (!module.parent){
-  const express = require('express');
+if(!module.parent) {
   const swaggerServer = express();
-  enableSwagger(swaggerServer);
-  swaggerServer.listen(3333, () => console.log('Listening on port 3333'));
+  const expressSwagger = generator(swaggerServer);
+  expressSwagger(options);
+  swaggerServer.listen(3333);
 }
 
-module.exports = enableSwagger;
+module.exports = server => generator(server)(options);

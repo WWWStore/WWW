@@ -6,6 +6,10 @@ const router = express.Router();
 const auth = require('./middleware');
 const User = require('./users-model');
 
+/**
+ * Sign up for a new account
+ * @route POST /signup
+ */
 router.post('/signup', (req,res,next) => {
   let user = new User(req.body);
   user.save()

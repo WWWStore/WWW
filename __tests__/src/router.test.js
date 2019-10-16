@@ -145,6 +145,7 @@ describe('products router tests', () => {
           .expect(200)
           .then(res => {
             expect(res.body).toHaveProperty('name', 'Tan Cowboy Boots');
+            expect(res.body).toHaveProperty('price', 4);
           });
       });
   });
