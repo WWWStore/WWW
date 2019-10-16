@@ -7,13 +7,10 @@ const auth = require('../auth/middleware');
 
 const User = require('../models/users-model');
 
-router.get('/:username/wagon', auth(), getWagon);
+router.get('/wagon', auth(), getWagon);
 
 function getWagon(req, res, next) {
-  User.getByUsername(req.params.username)
-    .then(results => {
-      res.send(results.wagon);
-    });
+  res.send(req.user.wagon);
 }
 
 module.exports = router;
