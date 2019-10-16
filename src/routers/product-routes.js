@@ -26,7 +26,7 @@ router.post('/products/:id/save', auth(), addToCart);
  * @group Wagon - Operations for the user's wagon
  * @param {Wagon.model} wagon.body.required
  * @param {string} id.path.required
- * @security basicAuth
+ * @security [{"JWT": []},{"basicAuth": []}]
  */
 function addToCart(req, res, next) {
   console.log(req.user);

@@ -32,6 +32,12 @@ router.post('/signup', (req,res,next) => {
     .catch(next);
 });
 
+/**
+ * Sign in to an existing account
+ * @route GET /signin
+ * @group User
+ * @security [{"JWT": []},{"basicAuth": []}]
+ */
 router.get('/signin', auth(), (req,res,next) => {
   res.cookie('auth', req.token);
   res.send(req.token);
