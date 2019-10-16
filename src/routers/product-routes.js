@@ -58,7 +58,7 @@ function getAllProducts(req,res,next) {
 /**
  * Gets one product from the database given an ID, returning the product details to the client.
  * @route GET /products/{id}
- * @param {number} id
+ * @param {string} id.path
  */
 function getProduct(req,res,next) {
   products.get(req.params.id)
@@ -70,7 +70,7 @@ function getProduct(req,res,next) {
  * @typedef Product
  * @property {string} name.required
  * @property {string} description.required
- * @property {float} price.required
+ * @property {number} price.required
  * @property {array} categories.required
  * @property {string} image_url.required
  * @property {array} keywords
@@ -89,8 +89,8 @@ function postProduct(req,res,next) {
 /**
  * Updates one product based on given parameters and saves the updates to the database.
  * @route PUT /products/{id}
- * @param {number} product.body.required
- * @param {object} product.body.required
+ * @param {string} id.path
+ * @param {Product.model} product.body.required
  */
 function putProduct(req,res,next) {
   products.update(req.params.id, req.body)
@@ -98,6 +98,11 @@ function putProduct(req,res,next) {
     .catch(next);
 }
 
+/**
+ * Deletes one product from the database given an ID.
+ * @route DELETE /products/{id}
+ * @param {string} id.path
+ */
 function deleteProducts(req,res,next) {
   products.delete(req.params.id)
     .then(result => res.status(200).json(result))
