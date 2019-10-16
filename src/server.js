@@ -9,6 +9,7 @@ const morgan = require('morgan');
 const productRouter = require('./routers/product-routes');
 const categoryRouter = require('./routers/category-routes');
 const authRouter = require('./auth/router');
+const userRouter = require('./routers/user-routes');
 const serverErr = require('./middleware/500');
 
 // Prepare express app
@@ -32,6 +33,7 @@ app.use(express.urlencoded({extended: true}));
 app.use(authRouter);
 app.use(categoryRouter);
 app.use(productRouter);
+app.use(userRouter);
 app.use(serverErr);
 
 module.exports = {
