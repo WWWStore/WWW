@@ -8,6 +8,7 @@
   "description": "this will be sooooo cool",
   "main": "index.js",
   "scripts": {
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json",
     "start": "node index.js",
     "test": "jest --verbose --coverage",
     "lint": "eslint '**/*.js'",

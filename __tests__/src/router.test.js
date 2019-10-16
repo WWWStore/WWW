@@ -71,7 +71,7 @@ describe('Auth Router', () => {
 
 describe('category router tests', () => {
   it('can create a category', () => {
-    return mockRequest.post('/categories/boots')
+    return mockRequest.post('/categories')
       .send(category)
       .expect(200)
       .then(res => {
@@ -144,6 +144,7 @@ describe('products router tests', () => {
           .expect(200)
           .then(res => {
             expect(res.body).toHaveProperty('name', 'Tan Cowboy Boots');
+            expect(res.body).toHaveProperty('price', 4);
           });
       });
   });

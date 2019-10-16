@@ -6,6 +6,19 @@ const router = express.Router();
 const auth = require('./middleware');
 const User = require('../models/users-model');
 
+/**
+ * @typedef User
+ * @property {string} username.required
+ * @property {string} password.required
+ * @property {string} role
+ * @property {array.<object>} wagon
+ */
+/**
+ * Sign up for a new account
+ * @route POST /signup
+ * @group User - Operations for user authentication
+ * @param {User.model} user.body.required
+ */
 router.post('/signup', (req,res,next) => {
   let user = new User(req.body);
   user.save()
@@ -19,6 +32,12 @@ router.post('/signup', (req,res,next) => {
     .catch(next);
 });
 
+/**
+ * Sign in to an existing account
+ * @route GET /signin
+ * @group User
+ * @security [{"JWT": []},{"basicAuth": []}]
+ */
 router.get('/signin', auth(), (req,res,next) => {
   res.cookie('auth', req.token);
   res.send(req.token);
