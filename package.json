@@ -4,9 +4,9 @@
   "description": "this will be sooooo cool",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "jest --verbose --coverage",
     "lint": "eslint '**/*.js'",
-    "start": "node index.js",
     "watch": "nodemon index.js"
   },
   "author": "",
