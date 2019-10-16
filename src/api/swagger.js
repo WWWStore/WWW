@@ -8,12 +8,12 @@ let options = {
       title: 'WWW Swagger Docs!',
       version: '1.0.1',
     },
-    host: 'localhost:3000',
+    host: process.env.API_HOST || 'localhost:3000',
     basePath: '',
     produces: [
       'application/json',
     ],
-    schemes: ['http'],
+    schemes: [process.env.API_SCHEME || 'http'],
     securityDefinitions: {
       basicAuth: {
         type: 'basic',
