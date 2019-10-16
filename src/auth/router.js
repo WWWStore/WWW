@@ -16,6 +16,7 @@ const User = require('./users-model');
 /**
  * Sign up for a new account
  * @route POST /signup
+ * @group User - Operations for user authentication
  * @param {User.model} user.body.required
  */
 router.post('/signup', (req,res,next) => {

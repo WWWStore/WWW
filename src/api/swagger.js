@@ -4,8 +4,8 @@ const generator = require('express-swagger-generator');
 let options = {
   swaggerDefinition: {
     info: {
-      description: 'API Server',
-      title: 'Swaggertastic Docs!',
+      description: 'Documentation to utilize the methods that we have implemented on our API server, the Wild Wild West.',
+      title: 'WWW Swagger Docs!',
       version: '1.0.1',
     },
     host: 'localhost:3000',
@@ -17,6 +17,12 @@ let options = {
     securityDefinitions: {
       basicAuth: {
         type: 'basic',
+      },
+      JWT: {
+        type: 'apiKey',
+        in: 'header',
+        name: 'Authorization',
+        description: '',
       },
     },
   },
