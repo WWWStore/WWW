@@ -17,10 +17,16 @@ router.delete('/products/:id', deleteProducts);
 router.post('/products/:id/save', auth(), addToCart);
 
 /**
+ * @typedef Wagon
+ * @property {integer} quantity.required
+ */
+/**
  * Takes in a user ID and product object - including an ID and a quantity - adding that product to your personal cart.
  * @route POST /products/{id}/save
- * @param {string} id.path
- * @param {object} update 
+ * @group Wagon - Operations for the user's wagon
+ * @param {Wagon.model} wagon.body.required
+ * @param {string} id.path.required
+ * @security basicAuth
  */
 function addToCart(req, res, next) {
   console.log(req.user);
@@ -42,6 +48,7 @@ function addToCart(req, res, next) {
 /**
  * Gets all products from the database, returning them to the client.
  * @route GET /products 
+ * @group Products - Operations for products
  */
 function getAllProducts(req,res,next) {
   products.get()
@@ -59,6 +66,7 @@ function getAllProducts(req,res,next) {
  * Gets one product from the database given an ID, returning the product details to the client.
  * @route GET /products/{id}
  * @param {string} id.path
+ * @group Products - Operations for products
  */
 function getProduct(req,res,next) {
   products.get(req.params.id)
@@ -71,13 +79,14 @@ function getProduct(req,res,next) {
  * @property {string} name.required
  * @property {string} description.required
  * @property {number} price.required
- * @property {array} categories.required
+ * @property {array.<string>} categories.required
  * @property {string} image_url.required
- * @property {array} keywords
+ * @property {array.<string>} keywords
  */
 /**
  * Creates one product and saves it to the database.
  * @route POST /products
+ * @group Products - Operations for products
  * @param {Product.model} product.body.required
  */
 function postProduct(req,res,next) {
@@ -89,6 +98,7 @@ function postProduct(req,res,next) {
 /**
  * Updates one product based on given parameters and saves the updates to the database.
  * @route PUT /products/{id}
+ * @group Products - Operations for products
  * @param {string} id.path
  * @param {Product.model} product.body.required
  */
@@ -101,6 +111,7 @@ function putProduct(req,res,next) {
 /**
  * Deletes one product from the database given an ID.
  * @route DELETE /products/{id}
+ * @group Products - Operations for products
  * @param {string} id.path
  */
 function deleteProducts(req,res,next) {

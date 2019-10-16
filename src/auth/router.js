@@ -7,8 +7,16 @@ const auth = require('./middleware');
 const User = require('./users-model');
 
 /**
+ * @typedef User
+ * @property {string} username.required
+ * @property {string} password.required
+ * @property {string} role
+ * @property {array.<object>} wagon
+ */
+/**
  * Sign up for a new account
  * @route POST /signup
+ * @param {User.model} user.body.required
  */
 router.post('/signup', (req,res,next) => {
   let user = new User(req.body);
