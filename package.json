@@ -1,6 +1,10 @@
 {
   "name": "01-node-ecosystem",
   "version": "0.0.1",
+  "engines": {
+    "node": "11.13.0",
+    "npm": "6.11.3"
+  },
   "description": "this will be sooooo cool",
   "main": "index.js",
   "scripts": {
