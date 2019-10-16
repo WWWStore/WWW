@@ -116,7 +116,6 @@ describe('products router tests', () => {
         return mockRequest.get('/products')
           .expect(200)
           .then(res => {
-            console.log(res.body.results[0]);
             expect(res.body.results[0]).toHaveProperty('name', 'Western Style Cowboy Boots');
             expect(res.body.results.length).toBe(2);
           });
@@ -186,6 +185,23 @@ describe('wagon methods test', () => {
             expect(res.body.length).toBe(1);
             expect(res.body[0]).toHaveProperty('productId', id);
             expect(res.body[0]).toHaveProperty('quantity', 2);
+          });
+      });
+  });
+
+  it('can get all products from the wagon', () => {
+    let id;
+    return mockRequest.get('/signin')
+      .auth(user.username, user.password)
+      .expect(200)
+      .then(results => {
+        let token = jwt.decode(results.text);
+        id = token.id;
+        expect(token.id).toEqual(id);
+        return mockRequest.get(`/${id}/wagon`)
+          .expect(200)
+          .then(res => {
+            expect(res.body.products).toBeDefined();
           });
       });
   });

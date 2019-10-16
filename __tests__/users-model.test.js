@@ -1,7 +1,6 @@
 'use strict';
 
-const Users = require('../src/models/users-model');
-const users = new Users();
+const User = require('../src/models/users-model');
 
 require('./supergoose');
 
@@ -13,7 +12,7 @@ describe('users model tests', () => {
       role: 'marshal',
       password: 'password',
     };
-    let record = await users.create(user);
+    let record = await User.create(user);
     expect(record).toHaveProperty('_id');
     expect(record).toHaveProperty('username', 'Andy');
     expect(record).toHaveProperty('role', 'marshal');
@@ -27,8 +26,8 @@ describe('users model tests', () => {
       role: 'marshal',
       password: 'password',
     };
-    let record = await users.create(user);
-    let updatedUser = await users.update( record._id, { wagon: ['cowboy hat'] });
+    let record = await User.create(user);
+    let updatedUser = await User.update( record._id, { wagon: ['cowboy hat'] });
     let userObject = updatedUser.toObject();
     //let saved = await users.get(record._id);
 
@@ -41,8 +40,8 @@ describe('users model tests', () => {
       role: 'marshal',
       password: 'password',
     };
-    let record = await users.create(user);
-    let deletedRecord = await users.delete(record._id);
+    let record = await User.create(user);
+    let deletedRecord = await User.delete(record._id);
     expect(deletedRecord).toBe(true);
   });
 });

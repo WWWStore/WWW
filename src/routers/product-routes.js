@@ -6,8 +6,7 @@ const auth = require('../auth/middleware');
 const Products = require('../models/products-model');
 const products = new Products();
 
-const Users = require('../models/users-model');
-const users = new Users();
+const User = require('../models/users-model');
 
 router.get('/products', getAllProducts);
 router.get('/products/:id', getProduct);
@@ -17,7 +16,6 @@ router.delete('/products/:id', deleteProducts);
 router.post('/products/:id/save', auth(), addToCart);
 
 function addToCart(req, res, next) {
-  console.log(req.user);
   let update = {
     $push: {
       wagon: {
@@ -26,7 +24,7 @@ function addToCart(req, res, next) {
       },
     },
   };
-  users.update(req.user._id, update)
+  User.update(req.user._id, update)
     .then(saved => {
       res.send(saved.wagon);
     })
