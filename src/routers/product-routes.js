@@ -33,7 +33,7 @@ function addToCart(req, res, next) {
       let update = {
         $push: {
           wagon: {
-            productId: req.params.id,
+            product: req.params.id,
             quantity: req.body.quantity,
             productData: result.toJSON(),
           },

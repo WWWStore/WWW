@@ -42,7 +42,7 @@ function updateQuantity(req, quantity) {
     },
   };
   return User.findByIdAndUpdate(req.user._id, updates, {
-    arrayFilters: [{'product.productId': {$eq: req.params.productId}}],
+    arrayFilters: [{'product.product': {$eq: req.params.productId}}],
     new: true,
   });
 }
