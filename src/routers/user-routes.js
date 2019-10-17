@@ -18,6 +18,7 @@ router.delete('/wagon/:productId', auth(), deleteFromCart);
  * @security [{"JWT": []},{"basicAuth": []}]
  */
 function getCart(req, res, next) {
+  console.log('getting cart');
   res.send(req.user.wagon);
 }
 

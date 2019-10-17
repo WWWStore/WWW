@@ -1,22 +1,34 @@
 const User = require('../models/users-model');
+const uuid = require('uuid/v4');
 
 module.exports = () =>
   async (req,res,next) => {
-    try {
-      let [authType, authString] = (req.headers.authorization || '').split(/\s+/);
-
-      switch(authType.toLowerCase()) {
-      case 'basic':
-        return await _authBasic(authString);
-      case 'bearer':
-        return await _authBearer(authString);
-      default:
-        return await _authError();
+    if(req.headers.authorization) {
+      try {
+        let [authType, authString] = (req.headers.authorization || '').split(/\s+/);
+  
+        switch(authType.toLowerCase()) {
+        case 'basic':
+          return await _authBasic(authString);
+        case 'bearer':
+          return await _authBearer(authString);
+        default:
+          return await _authError();
+        }
       }
+      catch(err) {
+        return await _authError(err);
+      }
+    } else if (req.cookies) {
+      console.log(req.cookies);
+    } else {
+      User.create({
+        username: `NONUSER-${uuid()}`,
+        password: uuid(),
+      })
+        .then(_authenticate);
     }
-    catch(err) {
-      return await _authError(err);
-    }
+    
 
     async function _authBasic(authString) {
       let decoded = Buffer.from(authString, 'base64').toString();
@@ -35,12 +47,15 @@ module.exports = () =>
       if(user) {
         req.user = user;
         req.token = user.generateToken();
+        res.set('token', req.token);
+        res.cookie('auth', req.token);
         next();
       } else {
         await _authError();
       }
     }
     async function _authError(err) {
+      console.error(err);
       next({status: 401, message: 'unauthorized'});
     }
   };
