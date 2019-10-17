@@ -37,9 +37,6 @@ function getCart(req, res, next) {
  */
 function updateCart(req, res, next) {
   return updateQuantity(req, req.body.quantity)
-    .then(user => {
-      return user.populateWagon();
-    })
     .then(saved => {
       res.send(saved.wagon);
     });
@@ -50,12 +47,10 @@ function updateCart(req, res, next) {
  * @route DELETE /wagon/{productId}
  * @group Wagon
  * @param {string} productId.path
+ * @security [{"JWT": []},{"basicAuth": []}]
  */
 function deleteFromCart(req, res, next) {
   return updateQuantity(req, 0)
-    .then(user => {
-      return user.populateWagon();
-    })
     .then(saved => {
       res.send(saved.wagon);
     });
@@ -70,7 +65,10 @@ function updateQuantity(req, quantity) {
   return User.findByIdAndUpdate(req.user._id, updates, {
     arrayFilters: [{'product.product': {$eq: req.params.productId}}],
     new: true,
-  });
+  })
+    .then(user => {
+      return user.populateWagon();
+    });
 }
 
 module.exports = router;

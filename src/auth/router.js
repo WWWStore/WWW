@@ -10,8 +10,6 @@ const User = require('../models/users-model');
  * @typedef User
  * @property {string} username.required
  * @property {string} password.required
- * @property {string} role
- * @property {array.<object>} wagon
  */
 /**
  * Sign up for a new account
