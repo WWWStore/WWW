@@ -220,4 +220,32 @@ describe('wagon methods test', () => {
           ]);
       });
   });
+
+  it('can delete a product from the user\'s wagon', () => {
+    return mockRequest.get(`/wagon`)
+      .auth(user.username, user.password)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toEqual([
+          { productId, quantity: 4 },
+        ]);
+      })
+      .then(() => {
+        return mockRequest.delete(`/wagon/${productId}`)
+          .auth(user.username, user.password)
+          .expect(200)
+          .then(res => {
+            expect(res.body.length).toBe(1);
+            expect(res.body[0]).toHaveProperty('productId', productId);
+            expect(res.body[0]).toHaveProperty('quantity', 0);
+            
+            return mockRequest.get('/wagon')
+              .auth(user.username, user.password)
+              .expect(200)
+              .expect([
+                { productId: productId, quantity: 0 },
+              ]);
+          });
+      });
+  });
 });
