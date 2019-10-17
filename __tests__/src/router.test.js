@@ -198,6 +198,22 @@ describe('wagon methods test', () => {
         expect(res.body).toEqual([
           { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
         ]);
+        return mockRequest.put(`/products/${productId}`)
+          .send({name: 'Tan Cowboy Boots'})
+          .expect(200)
+          .then(res => {
+            expect(res.body).toHaveProperty('name', 'Tan Cowboy Boots');
+            expect(res.body).toHaveProperty('price', 4);
+
+            return mockRequest.get('/wagon')
+              .auth(user.username, user.password)
+              .expect(200)
+              .then(res => {
+                expect(res.body).toEqual([
+                  { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Tan Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
+                ]);
+              });
+          });
       });
   });
 
