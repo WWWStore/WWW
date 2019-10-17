@@ -184,7 +184,7 @@ describe('wagon methods test', () => {
           .expect(200)
           .then(res => {
             expect(res.body).toMatchObject([
-              { product: productId, quantity: 2 },
+              { product: { _id: productId }, quantity: 2 },
             ]);
           });
       });
@@ -196,7 +196,7 @@ describe('wagon methods test', () => {
       .expect(200)
       .then(res => {
         expect(res.body).toMatchObject([
-          { product: productId, quantity: 2 },
+          { product: { _id: productId }, quantity: 2 },
         ]);
         
         return mockRequest.put(`/products/${productId}`)
@@ -211,7 +211,7 @@ describe('wagon methods test', () => {
               .expect(200)
               .then(res => {
                 expect(res.body).toMatchObject([
-                  { product: productId, quantity: 2 },
+                  { product: { _id: productId }, quantity: 2 },
                 ]);
               });
           });
@@ -226,7 +226,7 @@ describe('wagon methods test', () => {
       .expect(200)
       .then(res => {
         expect(res.body).toMatchObject([
-          { product: productId, quantity: 4 },
+          { product: { _id: productId }, quantity: 4 },
         ]);
         
         return mockRequest.get('/wagon')
@@ -234,7 +234,7 @@ describe('wagon methods test', () => {
           .expect(200)
           .expect(({ body }) => {
             expect(body).toMatchObject([
-              { product: productId, quantity: 4 },
+              { product: {_id: productId }, quantity: 4 },
             ]);
           });
       });
@@ -246,7 +246,7 @@ describe('wagon methods test', () => {
       .expect(200)
       .then(res => {
         expect(res.body).toMatchObject([
-          { product: productId, quantity: 4 },
+          { product: { _id: productId }, quantity: 4 },
         ]);
       })
       .then(() => {
@@ -255,7 +255,7 @@ describe('wagon methods test', () => {
           .expect(200)
           .then(res => {
             expect(res.body).toMatchObject([
-              { product: productId, quantity: 0 },
+              { product: { _id: productId }, quantity: 0 },
             ]);
             
             return mockRequest.get('/wagon')
@@ -263,7 +263,7 @@ describe('wagon methods test', () => {
               .expect(200)
               .expect(({ body }) => {
                 expect(body).toMatchObject([
-                  { product: productId, quantity: 0 },
+                  { product: { _id: productId }, quantity: 0 },
                 ]);
               });
           });
@@ -282,7 +282,7 @@ describe('wagon methods test', () => {
           .then(res => {
             anonToken = res.headers.token;
             expect(res.body).toMatchObject([
-              { product: productId, quantity: 2 },
+              { product: { _id: productId }, quantity: 2 },
             ]);
           });
       });
@@ -293,7 +293,7 @@ describe('wagon methods test', () => {
       .expect(200)
       .then(res => {
         expect(res.body).toMatchObject([
-          { product: productId, quantity: 2 },
+          { product: { _id: productId }, quantity: 2 },
         ]);
       });
   });

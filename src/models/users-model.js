@@ -18,6 +18,11 @@ const user = new mongoose.Schema({
   }],
 });
 
+user.methods.populateWagon = function() {
+  return this.populate('wagon.product')
+    .execPopulate();
+};
+
 user.statics.get = function(id) {
   if(id) {
     return this.findOne({_id: id});

@@ -30,6 +30,10 @@ router.post('/products/:id/save', auth(), addToCart);
 function addToCart(req, res, next) {
   products.get(req.params.id)
     .then(result => {
+      if (!result) {
+        next();
+        return;
+      }
       let update = {
         $push: {
           wagon: {
@@ -40,6 +44,9 @@ function addToCart(req, res, next) {
         },
       };
       User.update(req.user._id, update)
+        .then(user => {
+          return user.populateWagon();
+        })
         .then(saved => {
           res.send(saved.wagon).status(200);
         });
