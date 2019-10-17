@@ -18,20 +18,41 @@ router.delete('/wagon/:productId', auth(), deleteFromCart);
  * @security [{"JWT": []},{"basicAuth": []}]
  */
 function getCart(req, res, next) {
-  res.send(req.user.wagon);
-}
-
-function updateCart(req, res, next) {
-  return updateQuantity(req, req.body.quantity)
+  User.get(req.user._id)
     .then(user => {
-      res.send(user.wagon);
+      return user.populateWagon();
+    })
+    .then(saved => {
+      res.send(saved.wagon);
     });
 }
 
+/**
+ * Updates the quantity of a given product in a wagon.
+ * @route PUT /wagon/{productId}
+ * @group Wagon
+ * @param {Wagon.model} wagon.body.required
+ * @param {string} productId.path
+ * @security [{"JWT": []},{"basicAuth": []}]
+ */
+function updateCart(req, res, next) {
+  return updateQuantity(req, req.body.quantity)
+    .then(saved => {
+      res.send(saved.wagon);
+    });
+}
+
+/**
+ * Takes the quantity of a given product in your wagon and sets it to 0, to simulate deletion.
+ * @route DELETE /wagon/{productId}
+ * @group Wagon
+ * @param {string} productId.path
+ * @security [{"JWT": []},{"basicAuth": []}]
+ */
 function deleteFromCart(req, res, next) {
   return updateQuantity(req, 0)
-    .then(user => {
-      res.send(user.wagon);
+    .then(saved => {
+      res.send(saved.wagon);
     });
 }
 
@@ -42,9 +63,12 @@ function updateQuantity(req, quantity) {
     },
   };
   return User.findByIdAndUpdate(req.user._id, updates, {
-    arrayFilters: [{'product.productId': {$eq: req.params.productId}}],
+    arrayFilters: [{'product.product': {$eq: req.params.productId}}],
     new: true,
-  });
+  })
+    .then(user => {
+      return user.populateWagon();
+    });
 }
 
 module.exports = router;

@@ -183,9 +183,9 @@ describe('wagon methods test', () => {
           .send({ quantity: 2 })
           .expect(200)
           .then(res => {
-            expect(res.body.length).toBe(1);
-            expect(res.body[0]).toHaveProperty('productId', productId);
-            expect(res.body[0]).toHaveProperty('quantity', 2);
+            expect(res.body).toMatchObject([
+              { product: { _id: productId }, quantity: 2 },
+            ]);
           });
       });
   });
@@ -195,9 +195,26 @@ describe('wagon methods test', () => {
       .auth(user.username, user.password)
       .expect(200)
       .then(res => {
-        expect(res.body).toEqual([
-          { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
+        expect(res.body).toMatchObject([
+          { product: { _id: productId }, quantity: 2 },
         ]);
+        
+        return mockRequest.put(`/products/${productId}`)
+          .send({name: 'Tan Cowboy Boots'})
+          .expect(200)
+          .then(res => {
+            expect(res.body).toHaveProperty('name', 'Tan Cowboy Boots');
+            expect(res.body).toHaveProperty('price', 4);
+
+            return mockRequest.get('/wagon')
+              .auth(user.username, user.password)
+              .expect(200)
+              .then(res => {
+                expect(res.body).toMatchObject([
+                  { product: { _id: productId }, quantity: 2 },
+                ]);
+              });
+          });
       });
   });
 
@@ -208,16 +225,18 @@ describe('wagon methods test', () => {
       .send({quantity: 4})
       .expect(200)
       .then(res => {
-        expect(res.body.length).toBe(1);
-        expect(res.body[0]).toHaveProperty('productId', productId);
-        expect(res.body[0]).toHaveProperty('quantity', 4);
-
+        expect(res.body).toMatchObject([
+          { product: { _id: productId }, quantity: 4 },
+        ]);
+        
         return mockRequest.get('/wagon')
           .auth(user.username, user.password)
           .expect(200)
-          .expect([
-            { productId, quantity: 4, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
-          ]);
+          .expect(({ body }) => {
+            expect(body).toMatchObject([
+              { product: {_id: productId }, quantity: 4 },
+            ]);
+          });
       });
   });
 
@@ -226,8 +245,8 @@ describe('wagon methods test', () => {
       .auth(user.username, user.password)
       .expect(200)
       .then(res => {
-        expect(res.body).toEqual([
-          { productId, quantity: 4, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
+        expect(res.body).toMatchObject([
+          { product: { _id: productId }, quantity: 4 },
         ]);
       })
       .then(() => {
@@ -235,16 +254,18 @@ describe('wagon methods test', () => {
           .auth(user.username, user.password)
           .expect(200)
           .then(res => {
-            expect(res.body.length).toBe(1);
-            expect(res.body[0]).toHaveProperty('productId', productId);
-            expect(res.body[0]).toHaveProperty('quantity', 0);
+            expect(res.body).toMatchObject([
+              { product: { _id: productId }, quantity: 0 },
+            ]);
             
             return mockRequest.get('/wagon')
               .auth(user.username, user.password)
               .expect(200)
-              .expect([
-                { productId, quantity: 0, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
-              ]);
+              .expect(({ body }) => {
+                expect(body).toMatchObject([
+                  { product: { _id: productId }, quantity: 0 },
+                ]);
+              });
           });
       });
   });
@@ -260,8 +281,9 @@ describe('wagon methods test', () => {
           .expect(200)
           .then(res => {
             anonToken = res.headers.token;
-            expect(res.body[0]).toHaveProperty('productId', productId);
-            expect(res.body[0]).toHaveProperty('quantity', 2);
+            expect(res.body).toMatchObject([
+              { product: { _id: productId }, quantity: 2 },
+            ]);
           });
       });
   });
@@ -270,8 +292,8 @@ describe('wagon methods test', () => {
       .set('Authorization', `Bearer ${anonToken}`)
       .expect(200)
       .then(res => {
-        expect(res.body).toEqual([
-          { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
+        expect(res.body).toMatchObject([
+          { product: { _id: productId }, quantity: 2 },
         ]);
       });
   });

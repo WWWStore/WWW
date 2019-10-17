@@ -12,8 +12,16 @@ const user = new mongoose.Schema({
     default: 'ranger',
     enum: ['marshal', 'sheriff', 'deputy', 'ranger'],
   },
-  wagon: { type: Array, required: true, default: [] },
+  wagon: [{
+    product: { type: mongoose.Types.ObjectId, ref: 'products', required: true },
+    quantity: Number,
+  }],
 });
+
+user.methods.populateWagon = function() {
+  return this.populate('wagon.product')
+    .execPopulate();
+};
 
 user.statics.get = function(id) {
   if(id) {

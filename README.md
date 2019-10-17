@@ -1,5 +1,7 @@
 # WWW
 
+[![Build Status](https://travis-ci.com/WWWStore/WWW.svg?branch=master)](https://travis-ci.com/WWWStore/WWW)
+
 ## Wild Wild West
 
 #### The best place to shop for all your cowboy needs.

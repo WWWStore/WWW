@@ -27,11 +27,11 @@ describe('users model tests', () => {
       password: 'password',
     };
     let record = await User.create(user);
-    let updatedUser = await User.update( record._id, { wagon: ['cowboy hat'] });
+    let updatedUser = await User.update( record._id, { username: 'AndyToo' });
     let userObject = updatedUser.toObject();
     //let saved = await users.get(record._id);
 
-    expect(userObject).toHaveProperty('wagon', ['cowboy hat']);
+    expect(userObject).toHaveProperty('username', 'AndyToo');
   });
   it('can delete() an existing user', async () => {
     let user = {
