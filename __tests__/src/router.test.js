@@ -195,8 +195,9 @@ describe('wagon methods test', () => {
       .auth(user.username, user.password)
       .expect(200)
       .then(res => {
+        console.log(res.body);
         expect(res.body).toEqual([
-          { productId, quantity: 2 },
+          { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
         ]);
       });
   });
@@ -216,7 +217,7 @@ describe('wagon methods test', () => {
           .auth(user.username, user.password)
           .expect(200)
           .expect([
-            { productId: productId, quantity: 4 },
+            { productId, quantity: 4, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
           ]);
       });
   });
@@ -227,7 +228,7 @@ describe('wagon methods test', () => {
       .expect(200)
       .then(res => {
         expect(res.body).toEqual([
-          { productId, quantity: 4 },
+          { productId, quantity: 4, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
         ]);
       })
       .then(() => {
@@ -243,7 +244,7 @@ describe('wagon methods test', () => {
               .auth(user.username, user.password)
               .expect(200)
               .expect([
-                { productId: productId, quantity: 0 },
+                { productId, quantity: 0, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
               ]);
           });
       });

@@ -28,17 +28,21 @@ router.post('/products/:id/save', auth(), addToCart);
  * @security [{"JWT": []},{"basicAuth": []}]
  */
 function addToCart(req, res, next) {
-  let update = {
-    $push: {
-      wagon: {
-        productId: req.params.id,
-        quantity: req.body.quantity,
-      },
-    },
-  };
-  User.update(req.user._id, update)
-    .then(saved => {
-      res.send(saved.wagon);
+  products.get(req.params.id)
+    .then(result => {
+      let update = {
+        $push: {
+          wagon: {
+            productId: req.params.id,
+            quantity: req.body.quantity,
+            productData: result.toJSON(),
+          },
+        },
+      };
+      User.update(req.user._id, update)
+        .then(saved => {
+          res.send(saved.wagon).status(200);
+        });
     })
     .catch(next);
 }
