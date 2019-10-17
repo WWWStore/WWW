@@ -6,7 +6,6 @@ module.exports = () =>
     if(req.headers.authorization) {
       try {
         let [authType, authString] = (req.headers.authorization || '').split(/\s+/);
-  
         switch(authType.toLowerCase()) {
         case 'basic':
           return await _authBasic(authString);

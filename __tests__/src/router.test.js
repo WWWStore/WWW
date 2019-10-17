@@ -195,7 +195,6 @@ describe('wagon methods test', () => {
       .auth(user.username, user.password)
       .expect(200)
       .then(res => {
-        console.log(res.body);
         expect(res.body).toEqual([
           { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
         ]);
@@ -247,6 +246,33 @@ describe('wagon methods test', () => {
                 { productId, quantity: 0, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
               ]);
           });
+      });
+  });
+  let anonToken;
+  it('can add a product to a guest wagon if not signed in', () => {
+    return mockRequest.post('/products')
+      .send(product)
+      .expect(200)
+      .then(res => {
+        productId = res.body._id;
+        return mockRequest.post(`/products/${productId}/save`)
+          .send({ quantity: 2 })
+          .expect(200)
+          .then(res => {
+            anonToken = res.headers.token;
+            expect(res.body[0]).toHaveProperty('productId', productId);
+            expect(res.body[0]).toHaveProperty('quantity', 2);
+          });
+      });
+  });
+  it('can get products from wagon of guest', () => {
+    return mockRequest.get(`/wagon`)
+      .set('Authorization', `Bearer ${anonToken}`)
+      .expect(200)
+      .then(res => {
+        expect(res.body).toEqual([
+          { productId, quantity: 2, productData: { __v: 0, _id: productId, name: 'Western Style Cowboy Boots', price: 4, description: 'Your average, every day, normal cowboy needs boots. Available in tan or brown.', image_url: 'google.com', categories: ['boots', 'shoes', 'clothes'], keywords: ['boots', 'cowboy', 'tan', 'brown']}},
+        ]);
       });
   });
 });
