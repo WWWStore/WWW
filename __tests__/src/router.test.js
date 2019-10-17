@@ -200,4 +200,24 @@ describe('wagon methods test', () => {
         ]);
       });
   });
+
+  it('can update a product quantity in the user\'s wagon', () => {
+    expect(productId).toBeDefined();
+    return mockRequest.put(`/wagon/${productId}`)
+      .auth(user.username, user.password)
+      .send({quantity: 4})
+      .expect(200)
+      .then(res => {
+        expect(res.body.length).toBe(1);
+        expect(res.body[0]).toHaveProperty('productId', productId);
+        expect(res.body[0]).toHaveProperty('quantity', 4);
+
+        return mockRequest.get('/wagon')
+          .auth(user.username, user.password)
+          .expect(200)
+          .expect([
+            { productId: productId, quantity: 4 },
+          ]);
+      });
+  });
 });
