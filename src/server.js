@@ -16,14 +16,6 @@ const swagger = require('./api/swagger');
 // Prepare express app
 const app = express();
 
-/*========
-Test Route Delete After Code is Written
-========*/
-
-app.get('/500', () => {
-  throw 'Skylar is saying things';
-});
-
 // App  Middleware
 app.use(cors());
 app.use(morgan('dev'));

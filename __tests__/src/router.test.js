@@ -18,15 +18,6 @@ describe('error handling tests', () => {
         expect(res.status).toBe(404);
       });
   });
-
-  it('should return 500 for a faulty server-side issue', () => {
-    return mockRequest
-      .get('/500')
-      .expect(500)
-      .then(res => {
-        expect(res.status).toBe(500);
-      });
-  });
 });
 
 describe('Auth Router', () => {
