@@ -180,7 +180,7 @@
 
 {
   "name": "Springfield Model 1861 Rifle",
-  "description": "Rifled musket that fires a .58 round ball",
+  "description": "Rifled musket that fires a .58 minie ball",
   "image_url": "",
   "categories": ["firearms"],
   "price": 40,
