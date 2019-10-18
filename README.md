@@ -1,58 +1,26 @@
-# WWW
-
-[![Build Status](https://travis-ci.com/WWWStore/WWW.svg?branch=master)](https://travis-ci.com/WWWStore/WWW)
-
-## Wild Wild West
+# Wild West Warehouse
 
 #### The best place to shop for all your cowboy needs.
 
-The Wild Wild West can be a dangerous place. On this site, you'll find everything you need to successfully survive out there with all the outlaws and cowboys you may run across. Feel free to add anything to your cart, make requests for personalized items, and look around at all the interesting things our page has to offer.
+The Wild West can be a dangerous place. On this site, you'll find everything you need to survive out there with all the outlaws and rattlers you may run across. Feel free to add anything to your wagon and look around at all the interesting things our shop has for y'all.
+
+[![Build Status](https://travis-ci.com/WWWStore/WWW.svg?branch=master)](https://travis-ci.com/WWWStore/WWW)
+
+[WWW Back End Deployment](https://wwwshop.herokuapp.com)
+
+[WWW Back End Repository](https://github.com/WWWStore/WWW)
 
 ###### Made by Andy Fiedler, Steven Jones, Ian Smith, Jon Struve
 
-# LAB - 
-
-## Project Name
-
-### Author: Student/Group Name
-
-### Links and Resources
-* [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
-
 #### Documentation
-* [api docs](http://xyz.com) (API servers)
-* [jsdoc](http://xyz.com) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
+* [Click here to try it out!](https://wwwshop.herokuapp.com/api-docs)
 
-### Modules
-#### `modulename.js`
-##### Exported Values and Methods
-
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
-
-### Setup
-#### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
-
-#### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
-  
 #### Tests
-* How do you run tests?
-* What assertions were made?
-* What assertions need to be / should be made?
+* How did we run tests?
+  * A lot our tests were made through Supergoose, an extension we use to test out routes with fake requests to mimic real deployment.
+  * Other tests include database testing to make sure that something is properly saved to the database after the product or user has been created.
 
-#### UML
-Link to an image of the UML for your application and response to events
+#### Planning Process
+<img src="assets/images/whiteboard1.jpeg" width=300 height=auto>
+<img src="assets/images/whiteboard2.jpeg" width=300 height=auto>
+<img src="assets/images/whiteboard3.jpeg" width=300 height=auto>
