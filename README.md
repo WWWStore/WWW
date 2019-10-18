@@ -24,3 +24,13 @@ The Wild West can be a dangerous place. On this site, you'll find everything you
 <img src="assets/images/whiteboard1.jpeg" width=300 height=auto>
 <img src="assets/images/whiteboard2.jpeg" width=300 height=auto>
 <img src="assets/images/whiteboard3.jpeg" width=300 height=auto>
+
+### Plans for the Future
+
+* Connecting products to a category to filter by categories.
+* Not having duplicate products in the cart.
+* Payment/Shipping method implementation.
+* User gender specifications.
+* Other themes?
+* Best Sellers for our home page.
+* Recently viewed items to keep track of what they are interested in.
