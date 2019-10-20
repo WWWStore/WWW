@@ -27,10 +27,12 @@ The Wild West can be a dangerous place. On this site, you'll find everything you
 
 ### Plans for the Future
 
-* Connecting products to a category to filter by categories.
-* Not having duplicate products in the cart.
-* Payment/Shipping method implementation.
-* User gender specifications.
-* Other themes?
-* Best Sellers for our home page.
-* Recently viewed items to keep track of what they are interested in.
+`Preferably we get at least one of these done a week.`
+1. Connecting products to a category to filter by categories.
+2. Not having duplicate products in the cart.
+3. Payment - through Stripe or Paypal? - implementation.
+4. Shipping implementation.
+5. Best Sellers for our home page.
+6. Recently viewed items to keep track of what they are interested in.
+7. User gender specifications.
+8. Other themes?
