@@ -34,6 +34,9 @@ function addToCart(req, res, next) {
         next();
         return;
       }
+      let existingItem = req.user.wagon.find(index => index.product.id == result._id);
+      console.log(existingItem);
+      if(!existingItem) {
       let update = {
         $push: {
           wagon: {
@@ -50,6 +53,9 @@ function addToCart(req, res, next) {
         .then(saved => {
           res.send(saved.wagon).status(200);
         });
+      } else {
+        updateCart(req, existingItem.quantity);
+      }
     })
     .catch(next);
 }

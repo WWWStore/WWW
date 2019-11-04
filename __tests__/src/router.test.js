@@ -181,6 +181,24 @@ describe('wagon methods test', () => {
       });
   });
 
+  it('can add an item already in the cart and just update the quantity', () => {
+    return mockRequest.post('/products')
+    .send(product)
+    .expect(200)
+    .then(res => {
+      productId = res.body._id;
+      return mockRequest.post(`/products/${productId}/save`)
+        .auth(user.username, user.password)
+        .send({quantity: 2 })
+        .expect(200)
+        .then(res => {
+          expect(res.body).toMatchObject([
+            { product: { _id: productId }, quantity: 4 },
+          ]);
+        });
+    });
+  });
+
   it('can get all products from the wagon', () => {
     return mockRequest.get(`/wagon`)
       .auth(user.username, user.password)
