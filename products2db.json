@@ -129,7 +129,7 @@
   "description": "A leather vest to keep warm",
   "image_url": "",
   "categories": ["shirts"],
-  "price": 1,
+  "price": 4,
   "keywords": ["shirts", "leather", "vests"]
 },
 
@@ -174,7 +174,7 @@
   "description": "6-shot percussion revolver with a quick-change cylinder",
   "image_url": "",
   "categories": ["firearms"],
-  "price": 20,
+  "price": 25,
   "keywords": ["firearms", "revolvers", "guns", "remington", "weapons"]
 },
 
@@ -192,7 +192,7 @@
   "description": "A can of baked beans",
   "image_url": "",
   "categories": ["beans"],
-  "price": 1,
+  "price": 0.04,
   "keywords": ["beans", "food"]
 },
 
@@ -201,7 +201,7 @@
   "description": "Black beans of high quality. Rich in protein",
   "image_url": "",
   "categories": ["beans"],
-  "price": 1,
+  "price": 0.03,
   "keywords": ["beans", "food"]
 },
 
@@ -210,7 +210,7 @@
   "description": "A large and controversial bean",
   "image_url": "",
   "categories": ["beans"],
-  "price": 1,
+  "price": 0.05,
   "keywords": ["beans", "food"]
 },
 
@@ -239,5 +239,50 @@
   "categories": ["saddles"],
   "price": 32,
   "keywords": ["saddles", "leather"]
+}, 
+
+
+{
+  "name": "Lasso",
+  "description": "A lasso for ropin' dogies or bad guys",
+  "image_url": "",
+  "categories": ["accessories"],
+  "price": 2,
+  "keywords": ["accessories", "rope", "lassos", "tools", "horse stuff"]
+}, 
+
+{
+  "name": "Dynamite",
+  "description": "A bundle of dynamite for mining purposes, or conflict resolution",
+  "image_url": "",
+  "categories": ["explosives"],
+  "price": 10,
+  "keywords": ["accessories", "weapons", "explosives", "tools", "TNT"]
+},
+{
+  "name": "Beer",
+  "description": "An ice cold beer. Perfect for after a long days work on the range",
+  "image_url": "",
+  "categories": ["beverages"],
+  "price": 0.10,
+  "keywords": ["beverages", "beer", "alcohol"]
+},
+
+{
+  "name": "Whiskey",
+  "description": "Single malt whiskey. Good for celebrations and unwinnable gunfights",
+  "image_url": "",
+  "categories": ["beverages"],
+  "price": 2,
+  "keywords": ["beverages", "whiskey", "alcohol"]
+},
+
+{
+  "name": "Green beans",
+  "description": "Green beans. Delicious and nutritious",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 0.03,
+  "keywords": ["beans", "food", "vegetables"]
 }
 ]
