@@ -284,5 +284,114 @@
   "categories": ["beans"],
   "price": 0.03,
   "keywords": ["beans", "food", "vegetables"]
+},
+
+{
+  "name": "Cool Beans",
+  "description": "Like regular beans just more popular",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 0.05,
+  "keywords": ["beans", "food"]
+},
+
+{
+  "name": "Magic Beans",
+  "description": "Who knows what these little guys could do?",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 5,
+  "keywords": ["beans", "food"]
+},
+
+{
+  "name": "Jelly beans",
+  "description": "These sweet little beans are deeeeeeeelicious",
+  "image_url": "",
+  "categories": ["beans"],
+  "price": 0.01,
+  "keywords": ["beans", "food", "candy"]
+},
+
+{
+  "name": "Snake Oil",
+  "description": "Cure all ails!",
+  "image_url": "",
+  "categories": ["beverages", "medicine"],
+  "price": 10,
+  "keywords": ["beverages", "medicine", "malarkey"]
+},
+
+{
+  "name": "Winchester Rifle",
+  "description": "Rifled musket that fires a .58 minie ball",
+  "image_url": "",
+  "categories": ["firearms"],
+  "price": 28,
+  "keywords": ["firearms", "rifles", "guns", "winchester", "weapons"]
+},
+
+{
+  "name": "Sawed Off Shotgon",
+  "description": "A sawed off shotgun. Devastating at close range. Great for home defense or robberies!",
+  "image_url": "",
+  "categories": ["firearms"],
+  "price": 25,
+  "keywords": ["firearms", "shotguns", "guns", "weapons"]
+},
+
+{
+  "name": "Henry Repeater",
+  "description": "Rifled musket that fires a .58 minie ball",
+  "image_url": "",
+  "categories": ["firearms"],
+  "price": 29.50,
+  "keywords": ["firearms", "rifles", "guns", "repeater", "weapons"]
+},
+
+{
+  "name": "Two Tone Cowboy Boots",
+  "description": "Classic footwear for the rugged cowboy",
+  "image_url": "",
+  "categories": ["boots"],
+  "price": 18,
+  "keywords": ["boots"]
+},
+
+{
+  "name": "Leather Cowboy Hat",
+  "description": "This hat exudes toughness. Puts out a serious 'don't mess with me vibe' ",
+  "image_url": "",
+  "categories": ["hats"],
+  "price": 12,
+  "keywords": ["hats"]
+},
+
+{
+  "name": "Red bandana",
+  "description": "For booger removal or facial concealment during robberies",
+  "image_url": "",
+  "categories": ["facewear"],
+  "price": 1,
+  "keywords": ["facewear", "bandana", "hankie"]
+},
+
+{
+  "name": "Blue bandana",
+  "description": "For booger removal or facial concealment during robberies",
+  "image_url": "",
+  "categories": ["facewear"],
+  "price": 1,
+  "keywords": ["facewear", "bandana", "hankie"]
+},
+
+{
+  "name": "Black bandana",
+  "description": "For booger removal or facial concealment during robberies",
+  "image_url": "",
+  "categories": ["facewear"],
+  "price": 1,
+  "keywords": ["facewear", "bandana", "hankie"]
 }
+
 ]
