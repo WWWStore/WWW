@@ -83,6 +83,7 @@ user.methods.generateToken = function() {
   let tokenData = {
     id: this._id,
     role: this.role,
+    username: this.username,
   };
   return jwt.sign(tokenData, this.generateSecret());
 };
