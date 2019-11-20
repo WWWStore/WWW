@@ -2,7 +2,10 @@
 
 const User = require('../src/models/users-model');
 
-require('./supergoose');
+const jwt = require('jsonwebtoken');
+const server = require('../src/server').server;
+const supergoose = require('./supergoose');
+const mockRequest = supergoose(server);
 
 describe('users model tests', () => {
   it('can create a user', async () => {
@@ -43,5 +46,22 @@ describe('users model tests', () => {
     let record = await User.create(user);
     let deletedRecord = await User.delete(record._id);
     expect(deletedRecord).toBe(true);
+  });
+  it('gets back a username from the token', async () => {
+    let user = {
+      username: 'Andy4',
+      wagon: [],
+      role: 'marshal',
+      password: 'password',
+    };
+    return mockRequest
+      .post('/signup')
+      .send(user)
+      .expect(200)
+      .then(res => {
+        let decoded = jwt.decode(res.text);
+        expect(decoded.username).not.toBe(undefined);
+        expect(decoded.username).toBe('Andy4');
+      });
   });
 });
