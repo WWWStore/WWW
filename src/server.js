@@ -17,7 +17,11 @@ const swagger = require('./api/swagger');
 const app = express();
 
 // App  Middleware
-app.use(cors());
+let corsOptions = {
+  exposedHeaders: `token`,
+}
+
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
