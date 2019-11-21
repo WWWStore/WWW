@@ -19,7 +19,7 @@ const app = express();
 // App  Middleware
 let corsOptions = {
   exposedHeaders: `token`,
-}
+};
 
 app.use(cors(corsOptions));
 app.use(morgan('dev'));
